@@ -1,0 +1,147 @@
+<html>
+
+<title>Weather Section</title>
+
+<style>
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f6f8;
+    margin: 0;
+    padding: 20px;
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+.main {
+    display: flex;
+    gap: 20px;
+}
+
+.big-card {
+    width: 250px;
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.big-card h1 {
+    font-size: 40px;
+}
+
+.big-card hr {
+    margin: 15px 0;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    flex: 2;
+}
+
+.card {
+    background: #eef1f5;
+    padding: 15px;
+    border-radius: 12px;
+}
+
+.side {
+    width: 200px;
+    background: #eef1f5;
+    padding: 15px;
+    border-radius: 12px;
+}
+
+.side p {
+    margin: 10px 0;
+}
+
+.days {
+    margin-top: 30px;
+}
+
+.days button {
+    padding: 8px 14px;
+    margin: 5px;
+    border: none;
+    border-radius: 10px;
+    background: #e0e3e8;
+    cursor: pointer;
+}
+
+.days button:first-child {
+    background: #111827;
+    color: white;
+}
+
+</style>
+</head>
+
+<body>
+
+<h2>Today Overview</h2>
+
+<div class="main">
+
+    <div class="big-card">
+        <h1>28.6°C</h1>
+        <p>Clear Sky</p>
+        <hr>
+        <p>📍 Istanbul</p>
+        <p>28 August Monday</p>
+    </div>
+
+    <div class="grid">
+
+        <div class="card">
+            <p>Wind Speed</p>
+            <h3>28 km/h</h3>
+        </div>
+
+        <div class="card">
+            <p>Humidity</p>
+            <h3>48%</h3>
+        </div>
+
+        <div class="card">
+            <p>Pressure</p>
+            <h3>1008 hPa</h3>
+        </div>
+
+        <div class="card">
+            <p>Visibility</p>
+            <h3>10 km</h3>
+        </div>
+
+        <div class="card">
+            <p>Sunrise</p>
+            <h3>06:26</h3>
+        </div>
+
+        <div class="card">
+            <p>Sunset</p>
+            <h3>19:44</h3>
+        </div>
+
+    </div>
+
+    <div class="side">
+        <p>Mon 18:00 - 28.6°C</p>
+        <p>Mon 21:00 - 27.3°C</p>
+        <p>Tue 00:00 - 25.5°C</p>
+        <p>Tue 03:00 - 23.3°C</p>
+        <p>Tue 06:00 - 22.8°C</p>
+    </div>
+
+</div>
+
+
+
+</body>
+
+</html>
