@@ -7,57 +7,106 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: #f5f6f8;
+    background: linear-gradient(to right, #7ea7d8, #a8c8ff);
 }
 
-/* MAIN CONTAINER */
 .main {
-    width: 90%;
-    margin: 30px auto;
+    width: 95%;
+    margin: 20px auto;
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(15px);
+    padding: 25px;
+    border-radius: 25px;
 }
 
-/* TITLE BAR */
 .title-bar {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.section-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.dashboard {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.2fr;
+    grid-template-rows: auto auto auto;
+    gap: 25px;
+}
+
+/* LEFT BIG CARD */
+.current {
+    grid-column: 1;
+    grid-row: 1 / span 3;
+    background: linear-gradient(to bottom right, #6fa8ff, #cfe3ff);
+    border-radius: 25px;
+    padding: 25px;
+    color: white;
+}
+
+.current h1 {
+    font-size: 70px;
+    margin: 15px 0;
+}
+
+/* MIDDLE */
+.middle {
+    grid-column: 2 / span 2;
+    grid-row: 1 / span 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+.card {
+    background: rgba(255,255,255,0.7);
+    padding: 25px;
+    border-radius: 20px;
+}
+
+.card h2 {
+    font-size: 28px;
+}
+
+/* RIGHT FORECAST */
+.forecast {
+    grid-column: 4;
+    grid-row: 1 / span 3;
+    background: rgba(255,255,255,0.7);
+    padding: 25px;
+    border-radius: 20px;
+}
+
+.forecast p {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    margin: 12px 0;
+    font-size: 16px;
 }
 
-/* LEFT SIDE (LOGO + TEXT) */
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+/* BOTTOM */
+.bottom {
+    grid-column: 2 / span 2;
+    grid-row: 3;
+    background: rgba(255,255,255,0.7);
+    padding: 25px;
+    border-radius: 20px;
 }
 
-/* SEARCH BAR */
-.search {
-    display: flex;
-    gap: 10px;
-}
-
-.search input {
-    padding: 8px;
-    width: 250px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-}
-
-.search button {
-    padding: 8px 12px;
-    border-radius: 8px;
+.buttons button {
+    padding: 10px 15px;
+    margin: 5px;
+    border-radius: 12px;
     border: none;
-    background: black;
-    color: white;
+    background: #ddd;
 }
 
-/* RIGHT BUTTON */
-.support {
-    padding: 8px 15px;
-    background: #111827;
+.buttons button:first-child {
+    background: #2c3e50;
     color: white;
-    border-radius: 10px;
-    border: none;
 }
 
 </style>
@@ -67,25 +116,74 @@ body {
 
 <div class="main">
 
-    <!-- TITLE BAR -->
-    <div class="title-bar">
+<div class="title-bar">Weather Dashboard</div>
 
-        <!-- LEFT -->
-        <div class="logo">
-            <span>☁️</span>
-            <h3>weather</h3>
-        </div>
+<div class="section-title">Today Overview</div>
 
-        <!-- SEARCH -->
-        <div class="search">
-            <input type="text" placeholder="Search city">
-            <button>🔍</button>
-        </div>
+<div class="dashboard">
 
-        <!-- RIGHT -->
-        <button class="support">Support Project</button>
+<div class="current">
+<h3>Pune, IN</h3>
+<p>Monday, 24 April - 16:20</p>
+<h1>24°C</h1>
+<p>Partly Cloudy</p>
+<p>Feels like 26°C</p>
 
-    </div>
+<br>
+
+<p>Humidity: 58%</p>
+<p>Wind: 14 km/h</p>
+<p>Pressure: 1012 hPa</p>
+<p>UV Index: Moderate</p>
+</div>
+
+<div class="middle">
+
+<div class="card">
+<p>Humidity</p>
+<h2>58%</h2>
+</div>
+
+<div class="card">
+<p>Wind</p>
+<h2>14 km/h</h2>
+</div>
+
+<div class="card">
+<p>Pressure</p>
+<h2>1012 hPa</h2>
+</div>
+
+<div class="card">
+<p>UV Index</p>
+<h2>Moderate</h2>
+</div>
+
+</div>
+
+<div class="forecast">
+<h3>5-Day Forecast</h3>
+<p>Tomorrow <span>25°C / 16°C</span></p>
+<p>Wed <span>22°C / 14°C</span></p>
+<p>Thu <span>19°C / 13°C</span></p>
+<p>Fri <span>21°C / 12°C</span></p>
+<p>Sat <span>23°C / 15°C</span></p>
+</div>
+
+<div class="bottom">
+<h3>5-Day Forecast</h3>
+
+<div class="buttons">
+<button>All Days</button>
+<button>28 Aug</button>
+<button>29 Aug</button>
+<button>30 Aug</button>
+<button>31 Aug</button>
+</div>
+
+</div>
+
+</div>
 
 </div>
 
