@@ -1,191 +1,139 @@
 <html>
+
 <head>
-<title>Weather Dashboard</title>
+    <title>Weather Dashboard</title>
+    <style>
+        .main {
+            display:grid;
+            grid-template-areas: "title-bar"
+                                "container";
+            
+            grid-template-rows: 100px auto;
+            gap: 20px;
+            
+            
 
-<style>
+        }
+        .title-bar{
+            background-color: lightgray;
+            grid-area: title-bar;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 12px;
+        }
+        .body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: black
+        }
+        .container{
+            
+            height: auto;
+            grid-template-columns: 1fr 1fr;
+            display: grid;
+            grid-template-areas: "left right";
+            grid-template-rows: auto;
+            gap : 0px 20px;
+        }
+        .left{
+            height: 600px;
+            
+            display: grid;
+            grid-template-areas: "left-top"
+                                "left-bottom";
+            grid-template-rows: 1.5fr 1fr;
+            grid-template-columns: auto;
+            gap: 20px;
+            
+        }
+        .right{
+            height: 600px;
+            
+            display: grid;
+            grid-template-areas: "right-top"
+                                "right-bottom";
+            grid-template-rows: 1fr 1.5fr;
+            grid-template-columns: auto;
+            gap: 20px;
 
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(to right, #7ea7d8, #a8c8ff);
-}
+        }
+        .left-top{
+            background-color: yellow;
+            border-radius: 12px;
+        }
+        .left-bottom{
+            background-color: orange;
+            border-radius: 12px;
+        }
+        .right-top{
+            
+            display: grid;
+            grid-template-areas: "right-top1 right-top2 right-top3";
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: auto;
+            border-radius: 12px;
+            gap : 20px;
+        }
+        .right-bottom{
+            background-color: lightblue;
+            border-radius: 12px;
+        }
+        .right-top1{
+            background-color: lightgreen;
+            border-radius: 12px;
+           
+        }
+        .right-top2{
+            background-color: lightcoral;
+            border-radius: 12px;
+        }
+        .right-top3{
+            background-color: maroon;
+            border-radius: 12px;
+        }
 
-.main {
-    width: 95%;
-    margin: 20px auto;
-    background: rgba(255,255,255,0.2);
-    backdrop-filter: blur(15px);
-    padding: 25px;
-    border-radius: 25px;
-}
+        
 
-.title-bar {
-    font-size: 28px;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-.section-title {
-    font-size: 24px;
-    margin-bottom: 20px;
-}
-
-.dashboard {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1.2fr;
-    grid-template-rows: auto auto auto;
-    gap: 25px;
-}
-
-/* LEFT BIG CARD */
-.current {
-    grid-column: 1;
-    grid-row: 1 / span 3;
-    background: linear-gradient(to bottom right, #6fa8ff, #cfe3ff);
-    border-radius: 25px;
-    padding: 25px;
-    color: white;
-}
-
-.current h1 {
-    font-size: 70px;
-    margin: 15px 0;
-}
-
-/* MIDDLE */
-.middle {
-    grid-column: 2 / span 2;
-    grid-row: 1 / span 2;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 25px;
-}
-
-.card {
-    background: rgba(255,255,255,0.7);
-    padding: 25px;
-    border-radius: 20px;
-}
-
-.card h2 {
-    font-size: 28px;
-}
-
-/* RIGHT FORECAST */
-.forecast {
-    grid-column: 4;
-    grid-row: 1 / span 3;
-    background: rgba(255,255,255,0.7);
-    padding: 25px;
-    border-radius: 20px;
-}
-
-.forecast p {
-    display: flex;
-    justify-content: space-between;
-    margin: 12px 0;
-    font-size: 16px;
-}
-
-/* BOTTOM */
-.bottom {
-    grid-column: 2 / span 2;
-    grid-row: 3;
-    background: rgba(255,255,255,0.7);
-    padding: 25px;
-    border-radius: 20px;
-}
-
-.buttons button {
-    padding: 10px 15px;
-    margin: 5px;
-    border-radius: 12px;
-    border: none;
-    background: #ddd;
-}
-
-.buttons button:first-child {
-    background: #2c3e50;
-    color: white;
-}
-
-</style>
+    </style>
 </head>
 
 <body>
+    <div class="main">
+        <div class="title-bar">
+            <h1>Aditya's Weather Dashboard</h1>
 
-<div class="main">
+        </div>
+        <div class="container">
+            
+            <div class="left">
 
-<div class="title-bar">Weather Dashboard</div>
+                <div class="left-top">
+                </div>
+                <div class="left-bottom">
+                </div>
+            </div>
+            <div class="right">
+                <div class="right-top">
+                    <div class="right-top1">
 
-<div class="section-title">Today Overview</div>
+                    </div>
+                    <div class="right-top2">
 
-<div class="dashboard">
+                    </div>
+                    <div class="right-top3">
 
-<div class="current">
-<h3>Pune, IN</h3>
-<p>Monday, 24 April - 16:20</p>
-<h1>24°C</h1>
-<p>Partly Cloudy</p>
-<p>Feels like 26°C</p>
+                    </div>
+                </div>
+                <div class="right-bottom">
+                </div>
 
-<br>
+            </div>
+        </div>
+    </div>
 
-<p>Humidity: 58%</p>
-<p>Wind: 14 km/h</p>
-<p>Pressure: 1012 hPa</p>
-<p>UV Index: Moderate</p>
-</div>
 
-<div class="middle">
-
-<div class="card">
-<p>Humidity</p>
-<h2>58%</h2>
-</div>
-
-<div class="card">
-<p>Wind</p>
-<h2>14 km/h</h2>
-</div>
-
-<div class="card">
-<p>Pressure</p>
-<h2>1012 hPa</h2>
-</div>
-
-<div class="card">
-<p>UV Index</p>
-<h2>Moderate</h2>
-</div>
-
-</div>
-
-<div class="forecast">
-<h3>5-Day Forecast</h3>
-<p>Tomorrow <span>25°C / 16°C</span></p>
-<p>Wed <span>22°C / 14°C</span></p>
-<p>Thu <span>19°C / 13°C</span></p>
-<p>Fri <span>21°C / 12°C</span></p>
-<p>Sat <span>23°C / 15°C</span></p>
-</div>
-
-<div class="bottom">
-<h3>5-Day Forecast</h3>
-
-<div class="buttons">
-<button>All Days</button>
-<button>28 Aug</button>
-<button>29 Aug</button>
-<button>30 Aug</button>
-<button>31 Aug</button>
-</div>
-
-</div>
-
-</div>
-
-</div>
 
 </body>
+
 </html>
