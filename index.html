@@ -10,9 +10,6 @@
             
             grid-template-rows: 100px auto;
             gap: 20px;
-            
-            
-
         }
         .title-bar{
             background-color: lightgray;
@@ -28,7 +25,6 @@
             background: black
         }
         .container{
-            
             height: auto;
             grid-template-columns: 1fr 1fr;
             display: grid;
@@ -38,25 +34,21 @@
         }
         .left{
             height: 600px;
-            
             display: grid;
             grid-template-areas: "left-top"
                                 "left-bottom";
             grid-template-rows: 1.5fr 1fr;
             grid-template-columns: auto;
             gap: 20px;
-            
         }
         .right{
             height: 600px;
-            
             display: grid;
             grid-template-areas: "right-top"
                                 "right-bottom";
             grid-template-rows: 1fr 1.5fr;
             grid-template-columns: auto;
             gap: 20px;
-
         }
         .left-top{
             background-color: yellow;
@@ -67,7 +59,6 @@
             border-radius: 12px;
         }
         .right-top{
-            
             display: grid;
             grid-template-areas: "right-top1 right-top2 right-top3";
             grid-template-columns: 1fr 1fr 1fr;
@@ -82,7 +73,6 @@
         .right-top1{
             background-color: lightgreen;
             border-radius: 12px;
-           
         }
         .right-top2{
             background-color: lightcoral;
@@ -91,48 +81,75 @@
         .right-top3{
             background-color: maroon;
             border-radius: 12px;
+            color: white;
         }
-
-        
-
     </style>
 </head>
 
 <body>
     <div class="main">
+
         <div class="title-bar">
             <h1>Aditya's Weather Dashboard</h1>
-
         </div>
+
         <div class="container">
             
             <div class="left">
 
                 <div class="left-top">
+                    <h2>Pune, IN</h2>
+                    <p>Monday, 24 April - 16:20</p>
+                    <h1>24°C</h1>
+                    <p>Partly Cloudy</p>
+                    <p>Feels like 26°C</p>
                 </div>
+
                 <div class="left-bottom">
+                    <h3>Hourly Forecast</h3>
+                    <p>17:00 - 24°C</p>
+                    <p>18:00 - 23°C</p>
+                    <p>19:00 - 22°C</p>
+                    <p>20:00 - 21°C</p>
                 </div>
+
             </div>
+
             <div class="right">
+
                 <div class="right-top">
+
                     <div class="right-top1">
-
+                        <h3>Humidity</h3>
+                        <p>58%</p>
                     </div>
+
                     <div class="right-top2">
-
+                        <h3>Wind</h3>
+                        <p>14 km/h</p>
                     </div>
+
                     <div class="right-top3">
-
+                        <h3>UV Index</h3>
+                        <p>Moderate</p>
                     </div>
+
                 </div>
+
                 <div class="right-bottom">
+                    <h3>5-Day Forecast</h3>
+                    <p>Tomorrow - 25°C / 16°C</p>
+                    <p>Wed - 22°C / 14°C</p>
+                    <p>Thu - 19°C / 13°C</p>
+                    <p>Fri - 21°C / 12°C</p>
+                    <p>Sat - 23°C / 15°C</p>
                 </div>
 
             </div>
+
         </div>
+
     </div>
-
-
 
 </body>
 
