@@ -1,241 +1,190 @@
+<!DOCTYPE html>
 <html>
-  <head>
-    <title>Weather Dashboard</title>
-    <style>
-      .main {
-        display: grid;
-        grid-template-areas:
-          "title-bar"
-          "container";
+<head>
+  <title>Weather Dashboard</title>
 
-        grid-template-rows: 100px auto;
-        gap: 20px;
-      }
+  <style>
+    body {
+      font-family: Arial;
+      background-color: #1e293b;
+      color: white;
+      margin: 0;
+      padding: 20px;
+    }
 
-      .title-bar {
-        background-color: lightgray;
-        grid-template-columns: 1fr 2fr 1fr 0.5fr 1fr 0.5fr;
-        grid-template-rows: 1fr;
-        grid-template-areas: "title title title search search";
-        display: grid;
-        justify-content: left;
-        align-items: left;
-        border-radius: 12px;
-      }
+    .light {
+      background-color: #f1f5f9;
+      color: black;
+    }
 
-      .body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background: black;
-      }
+    .container {
+      max-width: 800px;
+      margin: auto;
+    }
 
-      .container {
-        height: auto;
-        grid-template-columns: 1fr 1fr;
-        display: grid;
-        grid-template-areas: "left right";
-        grid-template-rows: auto;
-        gap: 0px 20px;
-      }
+    .card {
+      background-color: #334155;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 10px;
+    }
 
-      .left {
-        height: 600px;
-        display: grid;
-        grid-template-areas:
-          "left-top"
-          "left-bottom";
-        grid-template-rows: 1.5fr 1fr;
-        grid-template-columns: auto;
-        gap: 20px;
-      }
+    .light .card {
+      background-color: white;
+    }
 
-      .right {
-        height: 600px;
-        display: grid;
-        grid-template-areas:
-          "right-top"
-          "right-bottom";
-        grid-template-rows: 1fr 1.5fr;
-        grid-template-columns: auto;
-        gap: 20px;
-      }
+    button {
+      padding: 6px 10px;
+      margin: 5px;
+      border: none;
+      background-color: #38bdf8;
+      border-radius: 5px;
+      cursor: pointer;
+    }
 
-      .left-top {
-        background-color: yellow;
-        border-radius: 12px;
-      }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
 
-      .left-bottom {
-        background-color: orange;
-        border-radius: 12px;
-      }
+    th, td {
+      border: 1px solid gray;
+      padding: 8px;
+      text-align: center;
+    }
 
-      .right-top {
-        display: grid;
-        grid-template-areas: "right-top1 right-top2 right-top3";
-        grid-template-columns: 1fr 1fr 1fr;
-        grid-template-rows: auto;
-        border-radius: 12px;
-        gap: 20px;
-      }
+    .footer {
+      text-align: center;
+      margin-top: 20px;
+    }
+  </style>
 
-      .right-bottom {
-        background-color: lightblue;
-        border-radius: 12px;
-      }
+  <script>
+    
+    let forecastData = [
+      { day: "Monday", temp: 28 },
+      { day: "Tuesday", temp: 30 },
+      { day: "Wednesday", temp: 27 },
+      { day: "Thursday", temp: 26 },
+      { day: "Friday", temp: 29 }
+    ];
 
-      .right-top1 {
-        background-color: lightgreen;
-        border-radius: 12px;
-      }
+   
+    function updateWeather() {
+      let city = document.getElementById("cityInput").value || "Pune";
 
-      .right-top2 {
-        background-color: lightcoral;
-        border-radius: 12px;
-      }
+      document.getElementById("cityName").innerText = city;
+      document.getElementById("temp").innerText = "28°C";
+      document.getElementById("humidity").innerText = "60%";
+      document.getElementById("wind").innerText = "15 km/h";
+    }
 
-      .right-top3 {
-        background-color: maroon;
-        border-radius: 12px;
-        color: white;
-      }
-    </style>
-    <script>
-      async function handleClick() {
-        const city = document.getElementById("cityInput").value || "pune";
-        let data = await getWeather(city);
-        updateUI(data);
-      }
+    
+    function renderTable(data) {
+      let table = document.getElementById("tableBody");
 
-      async function getWeather(city) {
-        // Get lat/lon from given city
+      table.innerHTML = data.map(item => `
+        <tr>
+          <td>${item.day}</td>
+          <td>${item.temp}°C</td>
+        </tr>
+      `).join("");
+    }
 
-        let url = "https://nominatim.openstreetmap.org/search?city=" + city + "&format=json&limit=1";
-        const geoRes = await fetch(url);
-        const geoData = await geoRes.json();
+    function filterHot() {
+      let filtered = forecastData.filter(item => item.temp > 28);
+      renderTable(filtered);
+    }
 
-        if (!geoData || geoData.length === 0) {
-          return;
-        }
+    function filterCold() {
+      let filtered = forecastData.filter(item => item.temp <= 28);
+      renderTable(filtered);
+    }
 
-        const lat = geoData[0].lat;
-        const lon = geoData[0].lon;
+    function sortAsc() {
+      let sorted = [...forecastData].sort((a, b) => a.temp - b.temp);
+      renderTable(sorted);
+    }
 
-        console.log("Lat:", lat, "Lon:", lon);
+    function sortDesc() {
+      let sorted = [...forecastData].sort((a, b) => b.temp - a.temp);
+      renderTable(sorted);
+    }
+ 
+    function resetTable() {
+      renderTable(forecastData);
+    }
 
-        // Get weather from Open-Meteo
-        url = "https://api.open-meteo.com/v1/forecast?latitude=" + lat + "&longitude=" + lon + "&current=temperature_2m,wind_speed_10m,snowfall,relative_humidity_2m";
-        let weatherRes = await fetch(url);
-        const weatherData = await weatherRes.json();
+    function likeApp() {
+      alert("❤️ You liked this dashboard!");
+    }
+    
+    function toggleTheme() {
+      document.body.classList.toggle("light");
+    }
 
-        const current = weatherData.current;
+    
+    window.onload = () => renderTable(forecastData);
+  </script>
+</head>
 
-        return {
-          city,
-          latitude: lat,
-          longitude: lon,
-          temperature: current.temperature_2m,
-          windSpeed: current.wind_speed_10m,
-          humidity: current.relative_humidity_2m,
-          snowfall: current.snowfall,
-        };
-      }
+<body>
 
-      function updateUI(data) {
-        console.log("Weather Data:", data);
+<div class="container">
 
-        document.getElementById("cityName").innerText = data.city;
+  <h1>🌤 Weather Dashboard</h1>
 
-        // Date & Time
-        const now = new Date();
-        document.getElementById("dateTime").innerText =
-          now.toLocaleDateString("en-IN", {
-            weekday: "long",
-            day: "numeric",
-            month: "long",
-          }) +
-          " - " +
-          now.toLocaleTimeString("en-IN", {
-            hour: "2-digit",
-            minute: "2-digit",
-          });
+  <div class="card">
+    <input id="cityInput" placeholder="Enter city">
+    <button onclick="updateWeather()">Search</button>
+    <button onclick="toggleTheme()">Toggle Theme</button>
+  </div>
 
-        document.getElementById("temperature").innerText =
-          data.temperature + "°C";
+  <div class="card">
+    <h2 id="cityName">Pune</h2>
+    <p>Temperature: <span id="temp">28°C</span></p>
+    <p>Humidity: <span id="humidity">60%</span></p>
+    <p>Wind: <span id="wind">15 km/h</span></p>
+    <button onclick="likeApp()">❤️ Like</button>
+  </div>
 
-        document.getElementById("condition").innerText = "Weather data";
+  <div class="card">
+    <h3>Hourly Forecast</h3>
+    <p>10:00 - 26°C</p>
+    <p>11:00 - 27°C</p>
+    <p>12:00 - 28°C</p>
+    <p>13:00 - 29°C</p>
+    <p>14:00 - 30°C</p>
+  </div>
 
-        document.getElementById("feelsLike").innerText =
-          "Feels like " + data.temperature + "°C";
-      }
-    </script>
-  </head>
+  <div class="card">
+    <h3>Filter / Sort</h3>
+    <button onclick="filterHot()">Hot Days</button>
+    <button onclick="filterCold()">Cold Days</button>
+    <button onclick="sortAsc()">Sort ↑</button>
+    <button onclick="sortDesc()">Sort ↓</button>
+    <button onclick="resetTable()">Reset</button>
+  </div>
 
-  <body>
-    <div class="main">
-      <div class="title-bar">
-        <div>
-          <img src="./img/Logo.jpg" width="50" />
-        </div>
-        <div>
-          <h1>Aditya's Weather Dashboard</h1>
-        </div>
-        <div></div>
-        <div></div>
-        <div>
-          <input id="cityInput" type="text" placeholder="Search city..." />
-        </div>
-        <div>
-          <button onclick="handleClick()">...</button>
-        </div>
-      </div>
-      <div class="container">
-        <div class="left">
-          <div class="left-top">
-            <h2 id="cityName">Pune, IN</h2>
-            <p id="dateTime">Monday, 24 April - 16:20</p>
-            <h1 id="temperature">24°C</h1>
-            <p id="condition">Partly Cloudy</p>
-            <p id="feelsLike">Feels like 26°C</p>
-          </div>
+  <div class="card">
+    <h3>5-Day Forecast</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Day</th>
+          <th>Temp</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+  </div>
 
-          <div class="left-bottom">
-            <h3>Hourly Forecast</h3>
-            <p>17:00 - 24°C</p>
-            <p>18:00 - 23°C</p>
-            <p>19:00 - 22°C</p>
-            <p>20:00 - 21°C</p>
-          </div>
-        </div>
+  <div class="footer">
+    Made by Aditya Musale ❤️
+  </div>
 
-        <div class="right">
-          <div class="right-top">
-            <div class="right-top1">
-              <h3>Humidity</h3>
-              <p>58%</p>
-            </div>
+</div>
 
-            <div class="right-top2">
-              <h3>Wind</h3>
-              <p>14 km/h</p>
-            </div>
-
-            <div class="right-top3">
-              <h3>UV Index</h3>
-              <p>Moderate</p>
-            </div>
-          </div>
-
-          <div class="right-bottom">
-            <h3>5-Day Forecast</h3>
-            <p>Tomorrow - 25°C / 16°C</p>
-            <p>Wed - 22°C / 14°C</p>
-            <p>Thu - 19°C / 13°C</p>
-            <p>Fri - 21°C / 12°C</p>
-            <p>Sat - 23°C / 15°</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </body>
+</body>
 </html>
